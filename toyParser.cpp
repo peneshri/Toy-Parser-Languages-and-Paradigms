@@ -51,6 +51,11 @@ void parseVariable(Parser &p) {
 
 // -------- <A> -> a<A> | a --------
 void parseA(Parser &p) {
+    prExpect(p, TOK_a, "a");
+    while (prCheck(p, TOK_a)) {
+        prAdvance(p);
+    }
+
 }
 
 // -------- <B> -> b<B> | b --------
