@@ -28,6 +28,7 @@ const char* tokenTypeName(TokenType t) {
 		case TOK_c: return "c"; break;
 
 		case TOK_EOF: return "EOF"; break;
+        case TOK_UNKNOWN: break;
 	}
 	return "Unknown";
 }

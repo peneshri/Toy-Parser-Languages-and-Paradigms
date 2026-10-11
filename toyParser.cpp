@@ -80,11 +80,14 @@ void parseC(Parser &p) {
 
 // -------- <program> -> <A><C><B> | <A> --------
 void parseProgram(Parser &p) {
-    parseA(p);
-    if (prCheck(p, TOK_c)) {
-        parseC(p);
+    while (1) {
+        parseA(p);
+        if (prCheck(p, TOK_c)) {
+            parseC(p);
+        }
+        if (prCheck(p, TOK_EOF)) return;
+        //else prError(p, "Unrecognized token " + p.tokens[p.pos].lexeme);
     }
-	prExpect(p, TOK_EOF, "EOF");
 }
 
 // =====================================================================
@@ -109,6 +112,11 @@ int main(int argc, char** argv) {
     int tokenCount = tokenize(&tk, tokens, MAX_TOKENS);
 
     fclose(fp);
+
+    for (int i=0; i<tokenCount; i++) {
+        cout << tokens[i].lexeme;
+    }
+    cout << endl;
 
 	Parser parser;
 	parser.tokens = tokens;
